@@ -1,9 +1,11 @@
 package com.sky.pay.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -13,7 +15,7 @@ public class AccountTests {
 
 	@ParameterizedTest
 	@MethodSource("validDepositsParameters")
-	public void DepositShouldIncreaseBalance(int initalAmount, int amount) {
+	public void depositShouldIncreaseBalance(int initalAmount, int amount) {
 		// Arrange
 		Account service = new Account(initalAmount);
 		
@@ -27,7 +29,7 @@ public class AccountTests {
 	
 	@ParameterizedTest
 	@MethodSource("negativeDepositsParameters")
-	public void DepositNegativeAmountShouldNotImpactBalance(int initalAmount, int amount) {
+	public void depositNegativeAmountShouldNotImpactBalance(int initalAmount, int amount) {
 		// Arrange
 		Account service = new Account(initalAmount);
 		
@@ -37,6 +39,20 @@ public class AccountTests {
 		// Assert
 		int actualAmount = service.getBalance();
 		assertEquals(initalAmount, actualAmount);
+	}
+	
+	@Test
+	@Disabled("The requirements does not presise what we should do in that case.")
+	public void overflowDepositShouldNotImpactBalance() {
+		// Arrange
+		Account service = new Account(1);
+		
+		// Act
+		service.deposit(Integer.MAX_VALUE);
+		
+		// Assert
+		int actualAmount = service.getBalance();
+		fail("Validate with POO what value should we expected in balance, actually: " + actualAmount);
 	}
 	
 	private static Stream<Arguments> validDepositsParameters() {
