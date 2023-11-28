@@ -10,8 +10,7 @@ public final class Account implements AccountService {
 	
 	@Override
 	public void deposit(int amount) {
-		// TODO Auto-generated method stub
-		
+		balance += amount;
 	}
 
 	@Override
