@@ -1,6 +1,7 @@
 package com.sky.pay.test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 import java.util.stream.Stream;
 
@@ -15,7 +16,8 @@ class AccountWithdrawTests {
 	@MethodSource("validWithdrawParameters")
 	public void withdrawShouldDecreaseBalance(int initialBalance, int amount) {
 		// Arrange
-		Account service = new Account(initialBalance);
+		PrintInerface mock = mock(PrintInerface.class);
+		Account service = new Account(initialBalance, mock);
 		
 		// Act
 		service.withdraw(amount);
@@ -29,7 +31,8 @@ class AccountWithdrawTests {
 	@MethodSource("negativeWithdrawParameters")
 	public void withdrawNegativeAmountShouldNotImpactBalance(int initialBalance, int amount) {
 		// Arrange
-		Account service = new Account(initialBalance);
+		PrintInerface mock = mock(PrintInerface.class);
+		Account service = new Account(initialBalance, mock);
 		
 		// Act
 		service.withdraw(amount);
@@ -43,7 +46,8 @@ class AccountWithdrawTests {
 	public void balanceShouldNotChangeWhenWithdrawAmountIsGreaterThanBalance() {
 		// Arrange
 		int initialBalance = 10;
-		Account service = new Account(initialBalance);
+		PrintInerface mock = mock(PrintInerface.class);
+		Account service = new Account(initialBalance, mock);
 		
 		// Act
 		service.withdraw(11);

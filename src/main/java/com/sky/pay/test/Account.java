@@ -3,9 +3,11 @@ package com.sky.pay.test;
 public final class Account implements AccountService {
 
 	private int balance;
+	private PrintInerface printInerface;
 	
-	public Account(int initialBalance) {
+	public Account(int initialBalance, PrintInerface printInerface) {
 		balance = initialBalance;
+		this.printInerface = printInerface;
 	}
 	
 	@Override
@@ -29,7 +31,7 @@ public final class Account implements AccountService {
 
 	@Override
 	public void printStatement() {
-		// TODO Auto-generated method stub
+		printInerface.print("");
 		
 	}
 	

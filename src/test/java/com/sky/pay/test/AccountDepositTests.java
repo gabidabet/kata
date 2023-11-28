@@ -1,5 +1,6 @@
 package com.sky.pay.test;
 
+import static org.mockito.Mockito.mock;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -17,7 +18,8 @@ public class AccountDepositTests {
 	@MethodSource("validDepositsParameters")
 	public void depositShouldIncreaseBalance(int initalAmount, int amount) {
 		// Arrange
-		Account service = new Account(initalAmount);
+		PrintInerface mock = mock(PrintInerface.class);
+		Account service = new Account(initalAmount, mock);
 		
 		// Act
 		service.deposit(amount);
@@ -31,7 +33,8 @@ public class AccountDepositTests {
 	@MethodSource("negativeDepositsParameters")
 	public void depositNegativeAmountShouldNotImpactBalance(int initalAmount, int amount) {
 		// Arrange
-		Account service = new Account(initalAmount);
+		PrintInerface mock = mock(PrintInerface.class);
+		Account service = new Account(initalAmount, mock);
 		
 		// Act
 		service.deposit(amount);
@@ -45,7 +48,8 @@ public class AccountDepositTests {
 	@Disabled("The requirements does not presise what we should do in that case.")
 	public void overflowDepositShouldNotImpactBalance() {
 		// Arrange
-		Account service = new Account(1);
+		PrintInerface mock = mock(PrintInerface.class);
+		Account service = new Account(1, mock);
 		
 		// Act
 		service.deposit(Integer.MAX_VALUE);
