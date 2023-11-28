@@ -18,8 +18,13 @@ public final class Account implements AccountService {
 
 	@Override
 	public void withdraw(int amount) {
-		// TODO Auto-generated method stub
-		
+		if(amount <= 0) {
+			return;
+		}
+		if(balance < amount) {
+			return;
+		}
+		balance -= amount;
 	}
 
 	@Override
