@@ -10,6 +10,9 @@ public final class Account implements AccountService {
 	
 	@Override
 	public void deposit(int amount) {
+		if(amount <= 0) {
+			return;
+		}
 		balance += amount;
 	}
 
