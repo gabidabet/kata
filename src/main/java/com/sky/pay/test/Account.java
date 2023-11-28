@@ -2,6 +2,12 @@ package com.sky.pay.test;
 
 public final class Account implements AccountService {
 
+	private int balance;
+	
+	public Account(int initialBalance) {
+		balance = initialBalance;
+	}
+	
 	@Override
 	public void deposit(int amount) {
 		// TODO Auto-generated method stub
@@ -20,4 +26,7 @@ public final class Account implements AccountService {
 		
 	}
 	
+	public int getBalance() {
+		return balance;
+	}
 }
