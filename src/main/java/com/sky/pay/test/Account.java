@@ -10,14 +10,18 @@ public final class Account implements AccountService {
 
 	private int balance;
 	private PrintInerface printInerface;
+	private TimePicker timePicker;
 	private static final int PADDING = 12;
 	private static final String PATTERN_FORMAT = "dd/MM/yyyy";
 	private final DateTimeFormatter formatter;
 	private final List<Operation> operations;
 	
-	public Account(int initialBalance, PrintInerface printInerface) {
+	public Account(int initialBalance,
+			PrintInerface printInerface,
+			TimePicker timePicker) {
 		balance = initialBalance;
 		this.printInerface = printInerface;
+		this.timePicker = timePicker;
 		formatter = DateTimeFormatter.ofPattern(PATTERN_FORMAT)
 				.withZone(ZoneId.of("UTC"));
 		operations = new ArrayList<>();
@@ -29,7 +33,7 @@ public final class Account implements AccountService {
 			return;
 		}
 		balance += amount;
-		operations.add(new Operation(Instant.now(), amount, balance));
+		operations.add(new Operation(timePicker.now(), amount, balance));
 	}
 
 	@Override
@@ -41,7 +45,7 @@ public final class Account implements AccountService {
 			return;
 		}
 		balance -= amount;
-		operations.add(new Operation(Instant.now(), -amount, balance));
+		operations.add(new Operation(timePicker.now(), -amount, balance));
 	}
 
 	@Override

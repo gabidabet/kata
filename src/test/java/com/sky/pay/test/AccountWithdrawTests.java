@@ -16,8 +16,9 @@ class AccountWithdrawTests {
 	@MethodSource("validWithdrawParameters")
 	public void withdrawShouldDecreaseBalance(int initialBalance, int amount) {
 		// Arrange
-		PrintInerface mock = mock(PrintInerface.class);
-		Account service = new Account(initialBalance, mock);
+		PrintInerface printInterfaceMock = mock(PrintInerface.class);
+		TimePicker timePickerMock = mock(TimePicker.class);
+		Account service = new Account(initialBalance, printInterfaceMock, timePickerMock);
 		
 		// Act
 		service.withdraw(amount);
@@ -31,8 +32,9 @@ class AccountWithdrawTests {
 	@MethodSource("negativeWithdrawParameters")
 	public void withdrawNegativeAmountShouldNotImpactBalance(int initialBalance, int amount) {
 		// Arrange
-		PrintInerface mock = mock(PrintInerface.class);
-		Account service = new Account(initialBalance, mock);
+		PrintInerface printInterfaceMock = mock(PrintInerface.class);
+		TimePicker timePickerMock = mock(TimePicker.class);
+		Account service = new Account(initialBalance, printInterfaceMock, timePickerMock);
 		
 		// Act
 		service.withdraw(amount);
@@ -46,8 +48,9 @@ class AccountWithdrawTests {
 	public void balanceShouldNotChangeWhenWithdrawAmountIsGreaterThanBalance() {
 		// Arrange
 		int initialBalance = 10;
-		PrintInerface mock = mock(PrintInerface.class);
-		Account service = new Account(initialBalance, mock);
+		PrintInerface printInterfaceMock = mock(PrintInerface.class);
+		TimePicker timePickerMock = mock(TimePicker.class);
+		Account service = new Account(initialBalance, printInterfaceMock, timePickerMock);
 		
 		// Act
 		service.withdraw(11);

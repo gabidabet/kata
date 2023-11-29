@@ -18,8 +18,9 @@ public class AccountDepositTests {
 	@MethodSource("validDepositsParameters")
 	public void depositShouldIncreaseBalance(int initalAmount, int amount) {
 		// Arrange
-		PrintInerface mock = mock(PrintInerface.class);
-		Account service = new Account(initalAmount, mock);
+		PrintInerface printInterfaceMock = mock(PrintInerface.class);
+		TimePicker timePickerMock = mock(TimePicker.class);
+		Account service = new Account(initalAmount, printInterfaceMock, timePickerMock);
 		
 		// Act
 		service.deposit(amount);
@@ -33,8 +34,9 @@ public class AccountDepositTests {
 	@MethodSource("negativeDepositsParameters")
 	public void depositNegativeAmountShouldNotImpactBalance(int initalAmount, int amount) {
 		// Arrange
-		PrintInerface mock = mock(PrintInerface.class);
-		Account service = new Account(initalAmount, mock);
+		PrintInerface printInterfaceMock = mock(PrintInerface.class);
+		TimePicker timePickerMock = mock(TimePicker.class);
+		Account service = new Account(initalAmount, printInterfaceMock, timePickerMock);
 		
 		// Act
 		service.deposit(amount);
@@ -48,8 +50,9 @@ public class AccountDepositTests {
 	@Disabled("The requirements does not presise what we should do in that case.")
 	public void overflowDepositShouldNotImpactBalance() {
 		// Arrange
-		PrintInerface mock = mock(PrintInerface.class);
-		Account service = new Account(1, mock);
+		PrintInerface printInterfaceMock = mock(PrintInerface.class);
+		TimePicker timePickerMock = mock(TimePicker.class);
+		Account service = new Account(1, printInterfaceMock, timePickerMock);
 		
 		// Act
 		service.deposit(Integer.MAX_VALUE);
